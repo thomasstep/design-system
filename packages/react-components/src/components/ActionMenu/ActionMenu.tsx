@@ -4,6 +4,7 @@ import { Placement } from '@floating-ui/react-dom';
 import cx from 'clsx';
 
 import { KeyCodes } from '../../utils/keyCodes';
+import { ListItem } from '../ListItem';
 import { Popover } from '../Popover';
 
 import { IActionMenuOption } from './types';
@@ -171,7 +172,14 @@ export const ActionMenu: React.FC<ActionMenuProps> = ({
         role="menu"
         aria-hidden={!isVisible}
       >
-        {options.map(getOptionElement)}
+        {options.map((o, i) => (
+          <ListItem
+            option={o}
+            index={i}
+            onClick={() => handleItemClick(o.onClick)}
+            isOptionActive={activeOptionKeys?.includes(o.key)}
+          />
+        ))}
       </ul>
     </Popover>
   );
